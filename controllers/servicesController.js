@@ -1,23 +1,13 @@
 
 var fs = require('fs'),
     logger = require('../logging/logger.js'),
-    blogPostsResource = require('../resources/blogPostsResource.js'),
-    projectsResource = require('../resources/projectsResource'),
-    staticPagesResource = require('../resources/staticPagesResource'),
-    blogPostResource = require('../resources/blogPostResource.js'),
-    projectResource = require('../resources/projectResource'),
-    staticPageResource = require('../resources/staticPageResource'),
+    routingObject = require('../routingObjectReturner.js');
 
 
 
 var actionDelegator = function(req, res) {
   
-  var resourcesObject = { 'blogPosts' : blogPostsResource, 
-                          'projects' : projectsResource,
-                          'staticPages' : staticPagesResource,
-                          'blogPost' : blogPostResource,
-                          'project' projectResource,
-                          'staticPage' : staticPageResource }, 
+  var resourcesObject = routingObject.resources, 
     potentialResource = url.split('/')[2],
     callThisResource;
 
