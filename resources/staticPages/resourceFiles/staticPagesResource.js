@@ -28,7 +28,7 @@ var staticPagesResourceObject = {
   },
 
   'post' : function(req, res) {
-    staticPagesDao.update(targetPost, req, res);
+    staticPagesDao.create(req, res);
   }
 
 }

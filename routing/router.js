@@ -1,12 +1,12 @@
 var fs = require('fs'),
-    routingObject = require('./routingObjectReturner.js');
+    moduleLoader = require('./moduleLoader.js');
 
 var router = function (req, res) {
 
-  routingObject.populateRoutingObject('controllers', function() {
+  moduleLoader.populateRoutingObject('controllers', function() {
 
-    var controllerCollection = routingObject.get.controllerCollection,
-        controllerArray = routingObject.get.controllerArray,
+    var controllerCollection = moduleLoader.get.controllerCollection,
+        controllerArray = moduleLoader.get.controllerArray,
         url = req.url,
         method = req.method,
         urlComponents = url.split('/'),
@@ -25,7 +25,7 @@ var router = function (req, res) {
 
       // Otherwise we are going to dish it out to the controller that can deal with the req
       callThisController = possibleController + 'Controller';
-      controllerObject.callThisController(req, res);
+      controllerCollection.callThisController(req, res);
 
     }
 

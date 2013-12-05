@@ -2,7 +2,7 @@ var fs = require('fs');
 
 var actionDelegator = function(req, res) {
   
-},
+}
 
 
 //to get our static pages resources

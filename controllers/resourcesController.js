@@ -1,12 +1,11 @@
-
 var fs = require('fs'),
     logger = require('../logging/logger.js'),
-    routingObject = require('../routing/routingObjectReturner.js');
+    moduleLoader = require('../routing/moduleLoader.js');
 
 var actionDelegator = function(req, res) {
-  routingObject.populateRoutingObject('resources', function() {
+  moduleLoader.populateRoutingObject('resources', function() {
 
-    var resourceCollection = resourcesObject.get.resourceCollection, 
+    var resourceCollection = moduleLoader.get.resourceCollection, 
         potentialResource = url.split('/')[2],
         callThisResource;
 

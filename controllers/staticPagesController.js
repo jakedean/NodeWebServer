@@ -10,6 +10,7 @@ var actionDelegator = function(req, res) {
     
   fs.readdir('./views/staticPages', function(err, staticPages) {
     if (err) {
+      throw err;
       logger( __filename, err);
       res.write('There was an error with the request in static pages controller!')
     } else {
@@ -29,7 +30,7 @@ var actionDelegator = function(req, res) {
 
   });
   
-},
+}
 
 //to get our static pages resources
 var staticPagesResource = function(req, res) {
@@ -47,7 +48,7 @@ var staticPagesResource = function(req, res) {
 
   });
       
-},
+}
 
 var makeResourceCall = function(req, res, page) {
 
@@ -58,7 +59,7 @@ var makeResourceCall = function(req, res, page) {
       staticPageOptions = { host : req.headers.host, 
                             port : req.headers.port, 
                             path : '/resources/staticPage/' + basePage,
-                            method : req.method 
+                            method : req.method, 
                             data : req.body },
       dataToServe = '',
       resourceCall = http.request(staticPageOptions, function(res) {
@@ -75,6 +76,7 @@ var makeResourceCall = function(req, res, page) {
       });
   
   resourceCall.on('error', function(err) {
+    throw err;
     logger(__filename, err);
   });
   
@@ -84,6 +86,7 @@ var serve = function (req, res, page, dataToServe) {
 
   fs.readFile('./views/staticPages/' + page, function(err, data) {
           if (err) {
+            throw err;
             logger(__filename, err);
           } else {
             res.write(data);

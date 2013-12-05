@@ -1,5 +1,3 @@
-
-
 var fs = require('fs');
 
 var actionDelegator = function(req, res) {
@@ -23,7 +21,7 @@ var staticPagesResource = function(req, res) {
 
   });
       
-},
+}
 
 
 module.exports = function(req, res) {
