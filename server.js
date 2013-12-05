@@ -1,5 +1,6 @@
 var http = require('http'),
-    router = require('./router');
+    router = require('./routing/router.js'),
+    routeGenerator = require('./routing/routeGenerator.js').update();
 
 var requestListener = function(request, response) {
   router(request, response);

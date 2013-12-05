@@ -1,9 +1,9 @@
 var fs = require('fs'),
-    logger = require('../../logging/logger.js'),
-    staticPageDao = require('./staticPageDao.js'),
-    resourceUtility = require('../util/resourceUtilityFunctions');
+    logger = require('../../../logging/logger.js'),
+    staticPageDao = require('../daoFiles/staticPageDao.js'),
+    resourceUtility = require('../../../util/resourceUtilityFunctions');
 
-var staticPagesResourceObject = {
+var staticPageResourceObject = {
 
 	'httpVerb' : undefined,
 
@@ -14,9 +14,9 @@ var staticPagesResourceObject = {
 	'availableHttpActionsObj' : { 'get' : this.get, 'put' : this.put, 'delete' : this.delete },
 
   'actionDelegator' : function (req, res) {
-    var this.httpVerb = req.method,
-        this.httpBody = req.body,
-        this.targetPage = req.url.split('/services/staticPage/')[1];
+    this.httpVerb = req.method,
+    this.httpBody = req.body,
+    this.targetPage = req.url.split('/resources/staticPage/')[1];
 
     if (this.httpVerb in this.availableHttpActionsObj) {
     	this.availableHttpActionsObj[this.httpVerb](req, res);
@@ -32,7 +32,7 @@ var staticPagesResourceObject = {
 
   'put' : function(req, res) {
     staticPageDao.update(targetPost, req, res);
-  }
+  },
 
   'delete' : function(req, res) {
     staticPageDao.delete(targetPost, req, res);
@@ -42,6 +42,4 @@ var staticPagesResourceObject = {
 }
 
 
-module.exports = function(staticPageObject, req, res) {
-  return staticPageObject.actionDelegator(req, res);
-}
+module.exports = staticPageResourceObject;

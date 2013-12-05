@@ -1,7 +1,7 @@
 var fs = require('fs'),
-    logger = require('../../logging/logger.js'),
-    blogPostsDao = require('./blogPostsDao.js'),
-    resourceUtility = require('../util/resourceUtilityFunctions');
+    logger = require('../../../logging/logger.js'),
+    blogPostsDao = require('../daoFiles/blogPostsDao.js'),
+    resourceUtility = require('../../../util/resourceUtilityFunctions');
 
 var blogPostsResourceObject = {
 
@@ -14,8 +14,8 @@ var blogPostsResourceObject = {
 	'availableHttpActionsObj' : { 'get' : this.get, 'post' : this.post },
 
   'actionDelegator' : function (req, res) {
-    var this.httpVerb = req.method,
-        this.httpBody = req.body;
+    this.httpVerb = req.method,
+    this.httpBody = req.body;
 
     if (this.httpVerb in this.availableHttpActionsObj) {
     	this.availableHttpActionsObj[this.httpVerb](req, res);
@@ -36,7 +36,4 @@ var blogPostsResourceObject = {
 
 }
 
-
-module.exports = function(blogPostsResourceObject, req, res) {
-  return blogPostsResourceObject.actionDelegator(req, res);
-}
+module.exports = blogPostsResourceObject;

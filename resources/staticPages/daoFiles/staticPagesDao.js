@@ -1,15 +1,14 @@
 var fs = require('fs'),
-    logger = require('../../logging/logger.js'),
-    mongo = require('mongo');
+    logger = require('../../../logging/logger.js');
 
 var staticPagesDaoObject = {
 
   'dbConnection' : function() {
   	//this is our mongo connection
-  }
+  },
 
 	'create' : function (targetProject, req, res) {
-    //get a specific blog post by index
+	//get a specific blog post by index
 	}
 
 }

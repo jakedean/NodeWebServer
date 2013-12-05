@@ -1,9 +1,9 @@
 var fs = require('fs'),
-    logger = require('../../logging/logger.js'),
-    blogPostDao = require('./blogPostsDao.js'),
-    resourceUtility = require('../util/resourceUtilityFunctions');
+    logger = require('../../../logging/logger.js'),
+    blogPostDao = require('../daoFiles/blogPostsDao.js'),
+    resourceUtility = require('../../../util/resourceUtilityFunctions');
 
-var blogPostsResourceObject = {
+var blogPostResourceObject = {
 
 	'httpVerb' : undefined,
 
@@ -11,12 +11,12 @@ var blogPostsResourceObject = {
 
 	'targetPost' : undefined,
 
-	'availableHttpActionsObj' : {'get' : this.get, 'put' : this.put },
+	'availableHttpActionsObj' : {'get' : this.get, 'put' : this.put, 'delete' : this.delete },
 
   'actionDelegator' : function (req, res) {
-    var this.httpVerb = req.method,
-        this.httpBody = req.body,
-        this.targetPost = req.url.split('/services/blogPost/')[1];
+    this.httpVerb = req.method,
+    this.httpBody = req.body,
+    this.targetPost = req.url.split('/services/blogPost/')[1];
 
     if (this.httpVerb in this.availableHttpActionsObj && IsNumeric(this.targetPost)) {
     	this.availableHttpActionsObj[this.httpVerb](req, res);
@@ -32,7 +32,7 @@ var blogPostsResourceObject = {
 
   'put' : function(req, res) {
     blogPostDao.update(targetPost, req, res);
-  }
+  },
 
   'delete' : function(req, res) {
     blogPostDao.delete(targetPost, req, res);
@@ -41,7 +41,4 @@ var blogPostsResourceObject = {
 
 }
 
-
-module.exports = function(blogPostsResourceObject, req, res) {
-  return blogPostsResourceObject.actionDelegator(req, res);
-}
+module.exports = blogPostResourceObject;

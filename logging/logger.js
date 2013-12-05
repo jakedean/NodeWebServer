@@ -7,10 +7,11 @@ var logger = function (filename, errorInfo) {
       timeStamp = (currentDate.getMonth()+1) + '/' + currentDate.getUTCDate() + '/' + 
                   currentDate.getFullYear() + ' @ ' + currentDate.getHours() + ':' + currentDate.getMinutes() + ':' + 
                   currentDate.getSeconds();  
-      logEntry = '------------------------------------------------------------------' + '\n' +
+      logEntry = '\n' +
+                 '------------------------------------------------------------------' + '\n' +
                   baseFileName + '\n' + timeStamp + '\n' + errorInfo +'\n' +
                  '------------------------------------------------------------------';
-  fs.appendFile(__dirname + logFileName, logEntry, function(err) {
+  fs.appendFile(__dirname + '/' + logFileName, logEntry, function(err) {
     if (err) {
       console.log('Oh no, there was an error in the logging class, the error was ' + err);
     } else {

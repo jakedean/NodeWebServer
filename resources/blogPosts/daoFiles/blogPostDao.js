@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    logger = require('../../logging/logger.js');
+    logger = require('../../../logging/logger.js');
 
 var blogPostDaoObject = {
 
